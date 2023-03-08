@@ -53,7 +53,7 @@ class ImageInDepth(scrapy.Spider):
         next_page_links = response.xpath('//a/@href').getall()
         # Validate next link is not already seen
         link_index = 0
-        while link_index < len(next_page_links) and next_page_links[link_index] in self.__urls_seen:
+        while link_index < len(next_page_links) and (next_page_links[link_index] in ['#', '/'] or next_page_links[link_index] in self.__urls_seen):
             link_index += 1
 
         if next_page_links[link_index] and self.__actual_depth < self.__depth:
